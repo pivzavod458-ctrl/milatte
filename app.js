@@ -209,7 +209,6 @@ function openProduct(productIndex) {
   }).join('');
   updateDetailTotal();
   setSheetState(productSheet, true);
-  document.querySelector('#productClose').focus({ preventScroll:true });
 }
 
 function paintStory() {
@@ -446,8 +445,6 @@ document.querySelector('#detailAdd').addEventListener('click', () => {
   closeSheet(productSheet);
 });
 
-document.querySelector('#productClose').addEventListener('click', () => closeSheet(productSheet));
-
 document.querySelector('#storyClose').addEventListener('click', closeStory);
 document.querySelector('#storyPrev').addEventListener('click', () => changeStory(-1));
 document.querySelector('#storyNext').addEventListener('click', () => changeStory(1));
@@ -470,3 +467,19 @@ cartFab.addEventListener('click', () => {
   renderCart();
   setSheetState(cartSheet, true);
 });
+
+// The menu is presented as a fixed mobile composition: prevent accidental browser zoom and side panning.
+let lastTouchEnd = 0;
+document.addEventListener('gesturestart', event => event.preventDefault(), { passive:false });
+document.addEventListener('gesturechange', event => event.preventDefault(), { passive:false });
+document.addEventListener('touchmove', event => {
+  if (event.touches.length > 1) event.preventDefault();
+}, { passive:false });
+document.addEventListener('touchend', event => {
+  const now = Date.now();
+  if (now - lastTouchEnd < 280) event.preventDefault();
+  lastTouchEnd = now;
+}, { passive:false });
+document.addEventListener('wheel', event => {
+  if (event.ctrlKey) event.preventDefault();
+}, { passive:false });
