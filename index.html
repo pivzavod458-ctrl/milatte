@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#f7f4ed">
+  <meta name="description" content="Демо мобильного меню городской кофейни Milatte в Павлодаре">
+  <title>Milatte - городская кофейня</title>
+  <link rel="preconnect" href="https://imageproxy.wolt.com">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="splash" id="splash" aria-label="Milatte загружается">
+    <video class="splash-video" id="splashVideo" autoplay muted playsinline preload="auto" poster="./milatte-splash-poster.jpg" aria-hidden="true">
+      <source src="./milatte-splash.mp4" type="video/mp4">
+    </video>
+    <div class="splash-shade" aria-hidden="true"></div>
+    <div class="splash-brand"><img src="./milatte-word.png" alt="Milatte"></div>
+    <div class="splash-dots" aria-label="Загрузка"><span></span><span></span><span></span></div>
+  </div>
+
+  <main class="app" id="app">
+    <header class="topbar">
+      <a class="location" href="https://2gis.kz/pavlodar/search/Milatte%20%D0%A1%D0%B0%D1%82%D0%BF%D0%B0%D0%B5%D0%B2%D0%B0%20306" target="_blank" rel="noopener" aria-label="Открыть адрес Milatte в 2ГИС">
+        <span><strong>Академика Сатпаева, 306</strong><em><span class="twogis-logo"><img src="./logo.png" alt=""></span>Открыть в 2ГИС</em></span>
+      </a>
+      <div class="top-brand" aria-label="Milatte">
+        <img src="./milatte-word.png" alt="Milatte">
+      </div>
+    </header>
+
+    <section class="search-hero" aria-label="Поиск по меню">
+      <div class="hero-search-line">
+        <input id="heroSearchInput" type="search" placeholder="Что хочется?" autocomplete="off" aria-label="Найти блюдо или напиток">
+      </div>
+      <p class="search-suggestions" id="searchSuggestions">Напишите, что вам хочется, например: круассан, завтрак или капучино.</p>
+      <div class="search-results" id="searchResults" aria-live="polite" hidden></div>
+    </section>
+
+    <section class="catalog-head">
+      <div class="category-row" role="tablist" aria-label="Разделы меню">
+        <button class="category active" data-category="all" type="button">
+          <i><img src="./assets/menu-v2/quinoa-bowl.webp" alt=""></i><span>Все</span>
+        </button>
+        <button class="category" data-category="breakfast" type="button">
+          <i><img src="./assets/menu-v2/english-breakfast.webp" alt=""></i><span>Завтраки</span>
+        </button>
+        <button class="category" data-category="drinks" type="button">
+          <i><img src="./assets/menu-v2/cappuccino.webp" alt=""></i><span>Напитки</span>
+        </button>
+        <button class="category" data-category="bakery" type="button">
+          <i><img src="./assets/menu-v2/croissant.webp" alt=""></i><span>Выпечка</span>
+        </button>
+        <button class="category" data-category="desserts" type="button">
+          <i><img src="./assets/menu-v2/fraisier.webp" alt=""></i><span>Десерты</span>
+        </button>
+      </div>
+      <div class="filter-row" aria-label="Фильтры меню">
+        <button class="filter active" data-filter="all" type="button">Все меню</button>
+        <button class="filter" data-filter="new" type="button">Новинки</button>
+        <button class="filter" data-filter="budget" type="button">Бюджет</button>
+        <button class="filter" data-filter="veg" type="button">Без мяса</button>
+        <button class="filter" data-filter="kids" type="button">Для детей</button>
+      </div>
+    </section>
+
+    <section class="products-section">
+      <div class="section-title"><div><h2 id="menuTitle">Все меню</h2><p id="menuHint">Нажмите на блюдо, чтобы посмотреть подробнее</p></div></div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="closing-illustration" aria-label="Milatte в 2ГИС">
+      <div class="closing-visual">
+        <img class="closing-photo" src="./photo_2026-09-10_23-28-03-Photoroom.png" alt="Руки держат пакет Milatte и кофе">
+      </div>
+      <a class="closing-rating" href="https://2gis.kz/pavlodar/search/Milatte%20%D0%A1%D0%B0%D1%82%D0%BF%D0%B0%D0%B5%D0%B2%D0%B0%20306" target="_blank" rel="noopener" aria-label="Открыть отзывы о Milatte в 2ГИС">
+        <span class="rating-score">4.9</span>
+        <span class="rating-count">449 отзывов</span>
+        <span class="rating-stars" aria-label="Рейтинг 4.9 из 5">★★★★★</span>
+        <span class="rating-source"><img src="./logo.png" alt="2ГИС"><em>Открыть отзывы</em></span>
+      </a>
+    </section>
+  </main>
+
+  <button class="cart-fab" id="cartFab" type="button"><span>Корзина</span><b id="cartTotal">0 ₸</b></button>
+  <div class="story-viewer" id="storyViewer" role="dialog" aria-modal="true" aria-label="Истории Milatte" aria-hidden="true">
+    <div class="story-stage">
+      <img class="story-photo" id="storyPhoto" src="" alt="">
+      <div class="story-overlay" aria-hidden="true"></div>
+      <div class="story-progress" id="storyProgress"></div>
+      <div class="story-topline"><span class="story-avatar"><img id="storyAvatar" src="" alt=""></span><strong id="storyCategory"></strong></div>
+      <button class="story-close" id="storyClose" type="button" aria-label="Закрыть истории">×</button>
+      <button class="story-tap story-prev" id="storyPrev" type="button" aria-label="Предыдущая история"></button>
+      <button class="story-tap story-next" id="storyNext" type="button" aria-label="Следующая история"></button>
+      <div class="story-info">
+        <h2 id="storyName"></h2>
+        <p id="storyDesc"></p>
+        <div><strong id="storyPrice"></strong><button class="story-add" id="storyAdd" type="button">В корзину</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mode-sheet" id="budgetSheet" aria-hidden="true">
+    <button class="sheet-backdrop" type="button" data-close-sheet aria-label="Закрыть"></button>
+    <section class="mode-card budget-card" role="dialog" aria-modal="true" aria-label="Бюджет на одно блюдо">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <label class="budget-input"><input id="budgetInput" type="number" inputmode="numeric" min="500" max="20000" step="100" placeholder="Бюджет на одно блюдо" aria-label="Максимальная цена"><span>₸</span></label>
+      <p class="budget-caption">Разделы</p>
+      <div class="budget-categories" id="budgetCategories">
+        <button class="active" type="button" data-budget-category="all">Все</button>
+        <button type="button" data-budget-category="breakfast">Завтраки</button>
+        <button type="button" data-budget-category="drinks">Напитки</button>
+        <button type="button" data-budget-category="bakery">Выпечка</button>
+        <button type="button" data-budget-category="desserts">Десерты</button>
+        <button type="button" data-budget-category="food">Кухня</button>
+      </div>
+      <div class="budget-actions"><button id="resetBudget" type="button">Сбросить</button><button class="primary" id="applyBudget" type="button">Показать блюда</button></div>
+    </section>
+  </div>
+
+  <div class="mode-sheet" id="productSheet" aria-hidden="true">
+    <button class="sheet-backdrop" type="button" data-close-sheet aria-label="Закрыть"></button>
+    <section class="mode-card product-card" role="dialog" aria-modal="true" aria-labelledby="detailName">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <button class="product-close" id="productClose" type="button" aria-label="Закрыть">×</button>
+      <div class="product-detail-image"><img id="detailImage" src="" alt=""></div>
+      <div class="product-detail-copy">
+        <h2 id="detailName"></h2>
+        <p id="detailDesc"></p>
+        <p class="detail-addon-title">Хорошо подойдет</p>
+        <div class="detail-addons" id="detailAddons"></div>
+      </div>
+      <button class="detail-add" id="detailAdd" type="button"><span>Добавить в корзину</span><b id="detailPrice"></b></button>
+    </section>
+  </div>
+
+  <div class="mode-sheet" id="cartSheet" aria-hidden="true">
+    <button class="sheet-backdrop" type="button" data-close-sheet aria-label="Закрыть"></button>
+    <section class="mode-card cart-card" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <h2 id="cartTitle">Корзина</h2>
+      <div class="cart-list" id="cartList"></div>
+      <div class="cart-summary"><span>Итого</span><strong id="cartSheetTotal">0 ₸</strong></div>
+      <button class="cart-done" id="cartDone" type="button">Готово</button>
+    </section>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
